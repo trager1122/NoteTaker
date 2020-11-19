@@ -4,7 +4,8 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-var notesData = require("../db/db");
+const notesData = require('./db/db.json');
+const store= require('../db/store')
 
 // ===============================================================================
 // ROUTING
@@ -13,7 +14,7 @@ var notesData = require("../db/db");
 module.exports = function(app) {
   // API GET Requests
   app.get("/api/notes", function(req, res) {
-    res.json(notesData);
+    //store.(function's name from store's file)
   });
 
   // API POST Requests

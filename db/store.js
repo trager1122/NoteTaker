@@ -6,18 +6,25 @@ class Store{
     constructor(id){
         this.id=id;
     }
-    getNotes(){
 
+    getNotes(){
+      fs.readFileSync(db,(data)=>{
+        return data;
+      })
     }
     
-    saveNote(){
-
+    saveNote(note){
+       id=id++;
+       db.push(note);
+       fs.writeFileSync("./db.json", note);
     }
 
-    deleteNote(){
-
+    deleteNote(id){
+        let jsonNew=db.filter((data)=>{
+            return data.id !==this.id;
+        })
+        fs.writeFileSync("db.json", jsonNew);
     }
-
 }
 
-module.exports=new Store();
+module.exports= new Store();

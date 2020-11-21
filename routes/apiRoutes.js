@@ -4,8 +4,8 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-const notesData = require('./db/db.json');
 const store= require('../db/store')
+const db= require('../db/db.json')
 
 // ===============================================================================
 // ROUTING
@@ -14,14 +14,23 @@ const store= require('../db/store')
 module.exports = function(app) {
   // API GET Requests
   app.get("/api/notes", function(req, res) {
-    //store.(function's name from store's file)
+    readFileAsync('./db/db.json','utf8', (err, data) => {
+      if (err) throw err;
+        let parsedNotes;
+        try {
+          parsedNotes = [].concat(JSON.parse(data));
+        } catch (err) {
+          parsedNotes = [];
+        }
+    })  
   });
 
   // API POST Requests
   app.post("/api/notes", function(req, res) {
-      notesData.push(req.body);
-      res.json(notesData);
+      
   });
+
+  //you may need to return app because this is a function
 
 }
 

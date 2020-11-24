@@ -4,8 +4,9 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-const store= require('../db/store')
-const db= require('../db/db.json')
+const fs= require('fs');
+const store= require('./db/store')
+let num=0;
 
 // ===============================================================================
 // ROUTING
@@ -14,7 +15,7 @@ const db= require('../db/db.json')
 module.exports = function(app) {
   // API GET Requests
   app.get("/api/notes", function(req, res) {
-    readFileAsync('./db/db.json','utf8', (err, data) => {
+    fs.readFileSync('./db/db.json','utf8', (err, data) => {
       if (err) throw err;
         let parsedNotes;
         try {
@@ -27,10 +28,24 @@ module.exports = function(app) {
 
   // API POST Requests
   app.post("/api/notes", function(req, res) {
-      
+    
+    }    
   });
 
-  //you may need to return app because this is a function
+  //API DELETE Requests
+  app.delete(req, res){
+    fs.readFileSync('./db/db.json','utf8', (err,data)=>{
+      if (err) throw err;
+      let parsedNotes;
+      try{
+        parsedNotes = [].concat(JSON.parse(data));
+      } catch (err) {
+        parsedNotes=[];
+      }
+      const notes=parsedNotes.filter(id);
+      }
+    })
+  }
 
 }
 

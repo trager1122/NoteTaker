@@ -1,10 +1,8 @@
 // ===============================================================================
 // LOAD DATA
 // We are linking our routes to a series of "data" sources.
-// These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 const store= require('../db/store')
-let num=0;
 
 // ===============================================================================
 // ROUTING
@@ -13,21 +11,17 @@ let num=0;
 module.exports = function(app) {
   // API GET Requests
   app.get("/api/notes", function(req, res) {
-    store
-    .getNotes();
+    store.getNotes().then(notes => res.json(notes));
   });
 
   // API POST Requests
   app.post("/api/notes", function(req, res) {
-    store
-    .addNote(req.body,num);
-    num++;
+    store.addNote(req.body).then(notes=>console.log(notes));
   });
 
   //API DELETE Requests
   app.delete("/api/notes/:id",function(req, res){
-    store
-      .removeNote(id);
+    store.deleteNote(req.params.id).then(notes=>res.json(notes));
   });
 }
 

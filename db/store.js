@@ -1,6 +1,7 @@
 //write and read file using fs module
 const util=require ('util');
 const fs = require('fs');
+const uniqid=require('uniqid');
 
 const readFileAsync=util.promisify(fs.readFile);
 const writeFileAsync=util.promisify(fs.writeFile);
@@ -32,15 +33,14 @@ class Store{
     if (!title || !text){
       throw new Error("Neither text or title can be blank for the note entered");
     }
-    const newNote={title,text,id:num};
-    num++;
-    this.getNotes()
+    const newNote={title,text,id:uniqid()};
+    return this.getNotes()
       .then((notes)=>[...notes,newNote])
       .then((currentNotes)=>this.write(currentNotes))
       .then(()=>newNote);
   }
 
-  removeNote(id) {
+  deleteNote(id) {
         return this.getNotes()
           .then((notes)=>notes.filter((note)=>note.id !== id))
           .then((filteredNotes)=>this.write(filteredNotes));

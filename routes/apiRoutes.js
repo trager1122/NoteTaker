@@ -4,6 +4,7 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 const store= require('../db/store')
+let num=0;
 
 // ===============================================================================
 // ROUTING
@@ -12,17 +13,21 @@ const store= require('../db/store')
 module.exports = function(app) {
   // API GET Requests
   app.get("/api/notes", function(req, res) {
-    getNotes();
+    store
+    .getNotes();
   });
 
   // API POST Requests
   app.post("/api/notes", function(req, res) {
-    addNote(req.body);
+    store
+    .addNote(req.body,num);
+    num++;
   });
 
   //API DELETE Requests
   app.delete("/api/notes/:id",function(req, res){
-    removeNote(id);
+    store
+      .removeNote(id);
   });
 }
 

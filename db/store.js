@@ -2,8 +2,6 @@
 const util=require ('util');
 const fs = require('fs');
 
-let num=0;
-
 const readFileAsync=util.promisify(fs.readFile);
 const writeFileAsync=util.promisify(fs.writeFile);
 

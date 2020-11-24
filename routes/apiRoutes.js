@@ -3,9 +3,7 @@
 // We are linking our routes to a series of "data" sources.
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
-const { addNote, removeNote } = require('../db/store');
-const store= require('./db/store')
-let num=0;
+const store= require('../db/store')
 
 // ===============================================================================
 // ROUTING
@@ -23,9 +21,9 @@ module.exports = function(app) {
   });
 
   //API DELETE Requests
-  app.delete(req, res){
-    removeNote();
-  }
+  app.delete("/api/notes/:id",function(req, res){
+    removeNote(id);
+  });
 }
 
   

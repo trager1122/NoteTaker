@@ -21,7 +21,7 @@ module.exports = function(app) {
 
   //API DELETE Requests
   app.delete("/api/notes/:id",function(req, res){
-    store.deleteNote(req.params.id).then(notes=>res.json(notes));
+    store.deleteNote(req.params.id).then(notes=>res.json(notes)).then(()=> res.json({ ok: true }));
   });
 }
 

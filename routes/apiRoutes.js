@@ -16,7 +16,7 @@ module.exports = function(app) {
 
   // API POST Requests
   app.post("/api/notes", function(req, res) {
-    store.addNote(req.body).then(notes=>console.log(notes));
+    store.addNote(req.body).then(notes=>res.json(notes));
   });
 
   //API DELETE Requests
